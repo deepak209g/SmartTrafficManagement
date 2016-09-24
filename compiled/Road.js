@@ -1,4 +1,4 @@
-// <reference path="./Junction.ts" />
+/// <reference path="./Junction.ts" />
 var Road = (function () {
     function Road() {
     }
