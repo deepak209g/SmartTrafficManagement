@@ -1,5 +1,5 @@
 class Set<T> {
-    list: T[];
+    private list: T[];
     constructor(){
         this.list = [];
     }
@@ -26,5 +26,11 @@ class Set<T> {
                 break;
             }
         }
+    }
+    size(){
+        return this.list.length;
+    }
+    getItem(index: number){
+        return this.list[index];
     }
 }

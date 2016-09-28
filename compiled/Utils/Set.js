@@ -26,5 +26,11 @@ var Set = (function () {
             }
         }
     };
+    Set.prototype.size = function () {
+        return this.list.length;
+    };
+    Set.prototype.getItem = function (index) {
+        return this.list[index];
+    };
     return Set;
 }());

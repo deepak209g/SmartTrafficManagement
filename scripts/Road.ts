@@ -3,18 +3,26 @@
 class Road{
     id: number;
     numOfLanes: number;
-    junctions: Junction[];
+    junctions: Set<Junction>;
     registerJunction(jun: Junction){
-        if(this.junctions.length == 0){
-            this.junctions.push(jun);
-        }else if(this.junctions.length == 1){
-            if(this.junctions[0].id != jun.id){
-                this.junctions.push(jun);
+        if(this.junctions.size() == 0){
+            this.junctions.add(jun);
+        }else if(this.junctions.size() == 1){
+            if(this.junctions.getItem(0).id != jun.id){
+                this.junctions.add(jun);
             }
         }
     }
     setNumOfLanes(lanes : number){
         this.numOfLanes = lanes;
+    }
+    equals(road: Road){
+        if(road == null){
+            return false;
+        }else if(this.id == road.id){
+            return true;
+        }
+        return false;
     }
     
 }
