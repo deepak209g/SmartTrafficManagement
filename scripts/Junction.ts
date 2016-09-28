@@ -35,11 +35,11 @@ class Junction {
     hasRoad(road: Road){
         return this.roads.contains(road);
     }
-    equals(road: Road){
+    equals(junction: Junction){
 
-        if(road == null){
+        if(junction == null){
             return false;
-        }else if(this.id == road.id){
+        }else if(this.id == junction.id){
             return true;
         }
         return false;

@@ -45,6 +45,10 @@ class Vehicle {
 
     // updates the current road of the vehicle
     moveToRoad(newRoad: Road, towardsJunction?: Junction) {
+        // update currentRoad
+        this.currentRoad = newRoad;
+        
+        // update towardsJunction
         if(towardsJunction){
             // towardsJunction given
             this.towardsJunction = towardsJunction;
@@ -52,13 +56,14 @@ class Vehicle {
             // towardsJunction not given
             // assume continuous movement as if crossing the junction;
             let junctions = newRoad.junctions;
-            for(let j=0; j<junctions.size(); j++){
-                let jun = junctions.getItem(j);
-                
+            if(junctions.size() == 2){
+                if(this.towardsJunction.equals(junctions.getItem(0))){
+                    this.towardsJunction = junctions.getItem(1);
+                }else if(this.towardsJunction.equals(junctions.getItem(1))){
+                    this.towardsJunction = junctions.getItem(0);
+                }
             }
         }
-        this.currentRoad = newRoad;
-        
     }
 }
 

@@ -40,6 +40,9 @@ var Vehicle = (function () {
     };
     // updates the current road of the vehicle
     Vehicle.prototype.moveToRoad = function (newRoad, towardsJunction) {
+        // update currentRoad
+        this.currentRoad = newRoad;
+        // update towardsJunction
         if (towardsJunction) {
             // towardsJunction given
             this.towardsJunction = towardsJunction;
@@ -48,11 +51,15 @@ var Vehicle = (function () {
             // towardsJunction not given
             // assume continuous movement as if crossing the junction;
             var junctions = newRoad.junctions;
-            for (var j = 0; j < junctions.size(); j++) {
-                var jun = junctions.getItem(j);
+            if (junctions.size() == 2) {
+                if (this.towardsJunction.equals(junctions.getItem(0))) {
+                    this.towardsJunction = junctions.getItem(1);
+                }
+                else if (this.towardsJunction.equals(junctions.getItem(1))) {
+                    this.towardsJunction = junctions.getItem(0);
+                }
             }
         }
-        this.currentRoad = newRoad;
     };
     return Vehicle;
 }());

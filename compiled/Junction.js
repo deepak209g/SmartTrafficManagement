@@ -1,3 +1,6 @@
+/// <reference path="Utils/Set.ts" />
+/// <reference path="Road.ts" />
+/// <reference path="Utils/Point.ts" />
 var Junction = (function () {
     function Junction(id, loc) {
         this.id = id;
@@ -28,11 +31,11 @@ var Junction = (function () {
     Junction.prototype.hasRoad = function (road) {
         return this.roads.contains(road);
     };
-    Junction.prototype.equals = function (road) {
-        if (road == null) {
+    Junction.prototype.equals = function (junction) {
+        if (junction == null) {
             return false;
         }
-        else if (this.id == road.id) {
+        else if (this.id == junction.id) {
             return true;
         }
         return false;
