@@ -5,18 +5,27 @@ enum VehicleTypes {
     BUS,
     BIKE
 }
+const defaultSpeed = 10;
 class Vehicle {
     type: VehicleTypes;
     private currentRoad: Road;
     speed: number;
     location: Point;
     towardsJunction: Junction;
-    laneNumber: number;
+    lane: Lane;
     constructor(type: VehicleTypes) {
         this.type = type;
+        this.currentRoad = null;
+        this.speed = defaultSpeed;
+        this.lane = null;
+        this.location = null;
+        this.towardsJunction = null;
     }
-    setRoad(road: Road) {
+    setRoad(road: Road, lane?: Lane) {
         this.currentRoad = road;
+        if(lane){
+            this.lane = lane;
+        }
     }
     getRoad() {
         return this.currentRoad;
