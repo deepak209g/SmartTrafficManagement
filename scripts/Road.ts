@@ -1,5 +1,8 @@
 /// <reference path="./Junction.ts" />
 /// <reference path="Utils/Queue.ts" />
+/// <reference path="Utils/PriorityQueue.ts" />
+
+
 
 interface TwoWayRoads{
     junction1: Array<Queue<Vehicle>>;

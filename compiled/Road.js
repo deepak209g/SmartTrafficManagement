@@ -1,5 +1,6 @@
 /// <reference path="./Junction.ts" />
 /// <reference path="Utils/Queue.ts" />
+/// <reference path="Utils/PriorityQueue.ts" />
 var Road = (function () {
     function Road(id) {
         this.id = id;
