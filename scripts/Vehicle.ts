@@ -11,6 +11,7 @@ class Vehicle {
     speed: number;
     location: Point;
     towardsJunction: Junction;
+    laneNumber: number;
     constructor(type: VehicleTypes) {
         this.type = type;
     }

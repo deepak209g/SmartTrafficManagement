@@ -1,13 +1,32 @@
 /// <reference path="./Junction.ts" />
-/// <reference path="Utils/Queue.ts" />
+/// <reference path="Vehicle.ts" />
 /// <reference path="Utils/PriorityQueue.ts" />
+var Lane = (function () {
+    function Lane(toJunction) {
+        var _this = this;
+        this.toJunction = toJunction;
+        var comparatorTowardsOne = function (a, b) {
+            var destination = _this.toJunction.location;
+            var dista = destination.distance(a.location);
+            var distb = destination.distance(b.location);
+            return dista < distb;
+        };
+        this.queue = new PriorityQueue();
+    }
+    // move vehicle to this lane
+    Lane.prototype.addVehicle = function (vehicle) {
+        this.queue.add(vehicle);
+    };
+    // remove the front vehicle from this lane
+    Lane.prototype.removeVehicle = function () {
+        return this.queue.remove();
+    };
+    return Lane;
+}());
 var Road = (function () {
     function Road(id) {
         this.id = id;
-        this.lanes = {
-            junction1: null,
-            junction2: null
-        };
+        this.lanes = null;
         this.junctions = new Set();
         this.numOfLanes = null;
     }
@@ -26,10 +45,34 @@ var Road = (function () {
             return false;
         }
         if (lanes >= 2) {
-            this.lanes.junction1 = new Array(lanes >> 1);
-            this.lanes.junction2 = new Array(lanes >> 1);
+            var lanesBytwo = lanes >> 1;
+            this.lanes = new Array(lanes);
+            for (var j = 0; j < this.junctions.size(); j++) {
+                var jun = this.junctions.getItem(j);
+                for (var i = 0; i < lanesBytwo; i++) {
+                    this.lanes.push(new Lane(jun));
+                }
+            }
         }
         this.numOfLanes = lanes;
+        // return true as the no. of lanes was set.
+        return true;
+    };
+    // returns an array of lanes which leads to the given junction
+    Road.prototype.getLanesTowardsJunction = function (jun) {
+        var toret = [];
+        for (var i = 0; i < this.lanes.length; i++) {
+            if (this.lanes[i].toJunction.equals(jun)) {
+                toret.push(this.lanes[i]);
+            }
+        }
+        if (toret.length == 0) {
+            // no lanes going to the provided junction
+            return null;
+        }
+        else {
+            return toret;
+        }
     };
     Road.prototype.equals = function (road) {
         if (road == null) {
