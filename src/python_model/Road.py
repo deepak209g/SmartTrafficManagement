@@ -3,7 +3,7 @@ from queue import Queue
 class Road(object):
     road_id=0
     def __init__(self, j1, j2):
-        Road.road_id++
+        Road.road_id+=1
         self.id = Road.road_id
         self.junctions = (j1, j2)
         self.towards_j1 = Queue()

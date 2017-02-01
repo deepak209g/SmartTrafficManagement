@@ -1,0 +1,19 @@
+*{
+  margin: 0px;
+  padding: 0px;
+}
+#c{
+  border: 1px solid black;
+  width: 900px;
+  height: 600px;
+}
+
+#controls{
+  border: 1px solid black;
+  position: absolute;
+  left: 915px;
+  width: 300px;
+  height: 600px;
+  top: 0px;
+  margin: 5px;
+}
