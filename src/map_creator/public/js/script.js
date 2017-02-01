@@ -6,13 +6,14 @@ $(document).ready(function () {
     var c1 = makeCircle(100, 100);
     var c2 = makeCircle(200, 200);
     
+
     canvas.add(c1);
     canvas.add(c2);
     var line = makeLine(c1, c2);
     canvas.add(line);
 
      
-    function makeCircle(left, top, line1, line2, line3, line4) {
+    function makeCircle(left, top) {
         var c = new fabric.Circle({
             left: left,
             top: top,
@@ -26,7 +27,6 @@ $(document).ready(function () {
         c.hasControls = c.hasBorders = false;
         c.lines = [];
         c.type = "circle";
-        addLine(c, 45);
         return c;    
     }
 
@@ -56,5 +56,32 @@ $(document).ready(function () {
         }
         
     });
-    console.log(canvas);
+
+    canvas.on("object:selected", function (e) {
+        console.log(e);
+    });
+
+    canvas.on("mouse:click", function (e) {
+        var x = e.e.clientX;
+        var y = e.e.clientY;
+
+        console.log(e);
+        if (MODE == JUNCTION) {
+            var circle = makeCircle(x, y);
+            canvas.add(circle);
+        }
+    })    
+    var MODE;
+    const JUNCTION = 0;
+    const ROAD = 1;
+    var j1 = null;
+    var j2 = null;
+    // Button event listeners
+    $("#addJunction").click(function () {
+        MODE = JUNCTION;
+    });
+
+    $("#addRoad").click(function () {
+        MODE = ROAD;
+    });
 });
